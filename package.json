@@ -1,8 +1,8 @@
 {
-  "name": "origin",
-  "version": "1.0.0",
+  "name": "origin-vue",
+  "version": "1.0.7",
   "description": "",
-  "main": "index.js",
+  "main": "origin-vue.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,12 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ALNY-AC/origin/issues"
+  },
+  "bin": {
+    "origin-vue": "./bin/origin-vue.js",
+    "ov": "./bin/origin-vue.js"
+  },
+  "dependencies": {
+    "commander": "^2.19.0"
   }
 }
