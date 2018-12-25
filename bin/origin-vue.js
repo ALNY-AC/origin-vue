@@ -11,8 +11,6 @@ program
     .option('-p, --page', '创建一个页面')
 program.parse(process.argv);
 
-console.log(process.versions);
-
 if (program.comp) {
     CreateComp();
 }
