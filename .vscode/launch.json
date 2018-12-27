@@ -8,7 +8,16 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序",
-            "program": "${workspaceFolder}\\index.js"
+            "program": "${workspaceFolder}\\bin\\origin-vue.js",
+            "windows": {
+                "args": [
+                    "-c",
+                    "-n",
+                    "info",
+                    "-s",
+                    "info/a",
+                ],
+            }
         }
     ]
 }

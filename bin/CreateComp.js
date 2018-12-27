@@ -1,5 +1,5 @@
 var program = require('commander');
-var fs = require('fs');   //fs是node.js的核心模块，不用下载安装，可以直接引入 
+const fs = require('fs-extra');
 var path = require('path');   //fs是node.js的核心模块，不用下载安装，可以直接引入 
 
 
@@ -35,8 +35,36 @@ function CreateComp() {
     //2. fs.mkdir  创建目录  
     if (program.name) {
         let name = program.name;
-        let newPath = path.join(process.cwd(), '');
-        let newPathFold = path.join(process.cwd(), name);
+        let newPathFold = path.join(process.cwd(), program.src ? program.src : name);
+        let compUrl = path.join(__dirname, './temp/comp');
+
+        fs.remove(path.join(process.cwd(), program.src.split('/')[0])).then(() => {
+            let writeFile = function (...file) {
+                fs.outputFile(`${newPathFold}/${name}.vue`, file[0]);
+                fs.outputFile(`${newPathFold}/${name}.js`, file[1]);
+                fs.outputFile(`${newPathFold}/${name}.scss`, file[2]);
+            }
+
+            fs.readFile(`${compUrl}/comp.vue`, 'utf8').then((vueFiles) => {
+                fs.readFile(`${compUrl}/comp.js`, 'utf8').then((jsFiles) => {
+                    fs.readFile(`${compUrl}/comp.scss`, 'utf8').then((scssFiles) => {
+
+                        var _vueFiles = vueFiles.replace(/{{ HEAD }}/g, name);
+                        var _jsFiles = jsFiles.replace(/{{ HEAD }}/g, name);
+                        var _scssFiles = scssFiles.replace(/{{ HEAD }}/g, name);
+
+                        writeFile(_vueFiles, _jsFiles, _scssFiles);
+
+                    });
+                });
+            });
+        })
+
+        return;
+
+
+        return;
+
         fs.unlink(newPathFold, function () {
             fs.mkdir(newPathFold, function () {
                 fs.readFile(path.join(__dirname, './temp/comp/comp.vue'), 'utf8', function (err, vueFiles) {

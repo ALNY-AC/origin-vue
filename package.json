@@ -21,6 +21,7 @@
     "ov": "./bin/origin-vue.js"
   },
   "dependencies": {
-    "commander": "^2.19.0"
+    "commander": "^2.19.0",
+    "fs-extra": "^7.0.1"
   }
 }
