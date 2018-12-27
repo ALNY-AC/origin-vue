@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ALNY-AC/origin.git"
+    "url": "https://github.com/ALNY-AC/origin-vue.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ALNY-AC/origin/issues"
+    "url": "https://github.com/ALNY-AC/origin-vue/issues"
   },
   "bin": {
     "origin-vue": "./bin/origin-vue.js",
