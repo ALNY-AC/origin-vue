@@ -1,6 +1,6 @@
 <template>
-  <div class="{{ HEAD }}">
-    {{ HEAD }}
+  <div class="{{ NAME }}">
+    {{ NAME }}
   </div>
 </template>
 <script src="./{{ HEAD }}.js"></script>

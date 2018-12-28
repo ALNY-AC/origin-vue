@@ -32,7 +32,7 @@ export default {
     beforeDestroy() { },
     //Vue 实例销毁后调用。
     destroyed() { },
-    // 当捕获一个来自子孙组件的错误时被调用。此
+    // 当捕获一个来自子孙组件的错误时被调用。
     errorCaptured() { },
     // 包含 Vue 实例可用指令的哈希表。
     directives: {},
