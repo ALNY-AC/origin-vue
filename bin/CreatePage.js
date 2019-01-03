@@ -12,8 +12,8 @@ function CreatePage() {
         let newPathFold = path.join(process.cwd(), program.src ? program.src : name);
         let _newPathFold = program.src ? program.src : name;
         let pageUrl = path.join(__dirname, './temp/page');
-
-        fs.remove(path.join(process.cwd(), program.src.split('/')[0])).then(() => {
+        let deleteSrc = program.src ? program.src.split('/')[0] : name;
+        fs.remove(path.join(process.cwd(), deleteSrc)).then(() => {
             let writeFile = function (...file) {
                 fs.outputFile(`${newPathFold}/${name}.vue`, file[0]);
                 fs.outputFile(`${newPathFold}/${name}.js`, file[1]);

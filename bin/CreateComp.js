@@ -21,7 +21,6 @@ function CreateComp() {
         })
         let compName = nameArr.join('-');
 
-
         fs.remove(path.join(process.cwd(), deleteSrc)).then(() => {
             let writeFile = function (...file) {
                 fs.outputFile(`${newPathFold}/${name}.vue`, file[0]);
