@@ -9,7 +9,6 @@ function CreatePage() {
     //2. fs.mkdir  创建目录  
     let name = program.page;//用户定义的名字
     if (typeof name == 'string') {
-        let name = program.name;
         let newPathFold = path.join(process.cwd(), program.src ? program.src : name);
         let _newPathFold = program.src ? program.src : name;
         let pageUrl = path.join(__dirname, './temp/page');
