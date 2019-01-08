@@ -7,7 +7,8 @@ const styles = require('./ConsoleStyle.js');   //fs是node.js的核心模块，�
 function CreatePage() {
 
     //2. fs.mkdir  创建目录  
-    if (program.name) {
+    let name = program.page;//用户定义的名字
+    if (typeof name == 'string') {
         let name = program.name;
         let newPathFold = path.join(process.cwd(), program.src ? program.src : name);
         let _newPathFold = program.src ? program.src : name;
@@ -44,8 +45,9 @@ function CreatePage() {
                 });
             });
         })
+    } else {
+        console.log('请指定一个页面名！');
     }
-
 }
 
 

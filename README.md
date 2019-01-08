@@ -10,11 +10,10 @@ Usage: ov [options] [entry]
 快速创建vue的页面级组件和组件级组件
 
 Options:
-
   -V, --version      output the version number
-  -c, --comp         创建一个组件
-  -n, --name <lang>  定义组件或页面的名称
-  -p, --page         创建一个页面
+  -c, --comp [lang]  创建一个组件
+  -p, --page [lang]  创建一个页面
+  -t, --test         测试
   -s, --src <lang>   指定一个路径
   -h, --help         output usage information
 
@@ -24,20 +23,20 @@ Options:
 > 目前仅支持生成`scss`格式的样式文件。
 
 ### 创建页面级组件
-使用 `-p` 指定为创建页面级组件，使用`-n` 为组件指定一个名称。
-`$ ov -p -n 组件名`
+使用 `-p` 指定为创建页面级组。
+`$ ov -p [组件名]`
 
 
 
 ### 创建组件级组件
-使用 `-c` 指定为创建页面级组件，使用`-n` 为组件指定一个名称。
-`$ ov -c -n 组件名`
+使用 `-c` 指定为创建页面级组件。
+`$ ov -c [组件名]`
 
 
 
 ### 为组件指定一个目录
 默认是在当前目录创建组件，使用`-s` 为组件指定一个目录。
-`$ ov -p -n UserInfo -s src/page/user/info`
+`$ ov -p UserInfo -s src/page/user/info`
 ![avatar](-s.png)
 
 

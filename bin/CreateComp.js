@@ -5,9 +5,9 @@ const styles = require('./ConsoleStyle.js');   //fs是node.js的核心模块，�
 
 
 function CreateComp() {
-    //2. fs.mkdir  创建目录  
-    if (program.name) {
-        let name = program.name;//用户定义的名字
+    //2. fs.mkdir  创建目录  SS
+    let name = program.comp;//用户定义的名字
+    if (typeof name == 'string') {
         let newPathFold = path.join(process.cwd(), program.src ? program.src : name);//新组件的路径
         let _newPathFold = program.src ? program.src : name;//新组建的文件夹名
         let compUrl = path.join(__dirname, './temp/comp');//组件的全局路径
@@ -15,12 +15,16 @@ function CreateComp() {
         let deleteSrc = program.src ? program.src.split('/')[0] : name;
 
         // 转化组件名为短横线 ======================================================
-        let nameArr = name.match(/[A-Z][a-z]+/g);
-        nameArr.forEach((k, i) => {
-            nameArr[i] = nameArr[i].toLowerCase();
-        })
-        let compName = nameArr.join('-');
-
+        let nameArr = name.match(/[A-Z][a-z]*/g);
+        let compName;
+        if (nameArr) {
+            nameArr.forEach((k, i) => {
+                nameArr[i] = nameArr[i].toLowerCase();
+            })
+            compName = nameArr.join('-');
+        } else {
+            compName = name
+        }
         fs.remove(path.join(process.cwd(), deleteSrc)).then(() => {
             let writeFile = function (...file) {
                 fs.outputFile(`${newPathFold}/${name}.vue`, file[0]);
@@ -58,6 +62,8 @@ function CreateComp() {
                 });
             });
         })
+    } else {
+        console.log('请指定一个组件名！');
     }
 
 }
