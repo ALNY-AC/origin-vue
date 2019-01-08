@@ -10,12 +10,13 @@ Usage: ov [options] [entry]
 快速创建vue的页面级组件和组件级组件
 
 Options:
-  -V, --version      output the version number
-  -c, --comp [lang]  创建一个组件
-  -p, --page [lang]  创建一个页面
-  -t, --test         测试
-  -s, --src <lang>   指定一个路径
-  -h, --help         output usage information
+  -V, --version       output the version number
+  -c, --comp [lang]   创建一个组件
+  -p, --page [lang]   创建一个页面
+  -t, --test          测试
+  -s, --src <lang>    指定一个路径
+  bc, --class <lang>  解析一个html文件的代码，并将class结构化输出
+  -h, --help          output usage information
 
 ````
 ## 警告
