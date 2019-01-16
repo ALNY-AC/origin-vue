@@ -4,6 +4,8 @@ const fs = require('fs-extra');
 var path = require('path');   //fs是node.js的核心模块，不用下载安装，可以直接引入 
 const styles = require('./ConsoleStyle.js');   //fs是node.js的核心模块，不用下载安装，可以直接引入 
 
+
+
 function GetClass() {
     let htmlSrc = program.class;
     fs.readFile(htmlSrc, 'utf8').then((html) => {

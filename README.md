@@ -40,6 +40,9 @@ Options:
 `$ ov -p UserInfo -s src/page/user/info`
 ![avatar](-s.png)
 
+### 爬取css组成scss语法
+`$ ov bc index.vue`
+
 
 ## 开发计划
 * 将会支持更多的CSS扩展语言。
