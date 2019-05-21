@@ -1,6 +1,6 @@
 {
   "name": "origin-vue",
-  "version": "1.0.16",
+  "version": "1.0.22",
   "description": "",
   "main": "origin-vue.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "ov": "./bin/origin-vue.js"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "commander": "^2.19.0",
     "fs-extra": "^7.0.1"
   }

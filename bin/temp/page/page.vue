@@ -3,7 +3,7 @@
     {{ HEAD }}
   </div>
 </template>
-<script src="./{{ HEAD }}.js"></script>
+<script src="./index.js"></script>
 <style lang="scss" scoped>
-@import "{{ HEAD }}.scss";
+@import "index.scss";
 </style>

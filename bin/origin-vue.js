@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 var program = require('commander');
-var CreateComp = require('./CreateComp');
-var CreatePage = require('./CreatePage');
+var Page = require('./Page');
+var Comp = require('./Comp');
 var GetClass = require('./GetClass');
-var Test = require('./Test');
 var appInfo = require('./../package.json');
 
 program
@@ -17,16 +16,15 @@ program.parse(process.argv);
 
 
 if (program.comp) {
-    CreateComp();
+    new Comp(program.comp);
+    // CreateComp();
 }
 if (program.page) {
-    CreatePage();
+    new Page(program.page);
 }
 if (program.class) {
     GetClass();
 }
-if (program.test) {
-    Test();
-}
+
 
 
