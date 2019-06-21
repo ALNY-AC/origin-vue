@@ -2,7 +2,7 @@
   "name": "origin-vue",
   "version": "1.0.22",
   "description": "",
-  "main": "origin-vue.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,8 +17,8 @@
     "url": "https://github.com/ALNY-AC/origin-vue/issues"
   },
   "bin": {
-    "origin-vue": "./bin/origin-vue.js",
-    "ov": "./bin/origin-vue.js"
+    "origin-vue": "./index.js",
+    "ov": "./index.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
