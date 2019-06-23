@@ -1,13 +1,31 @@
 export default {
-    name: '{{ HEAD }}',
+    name: '{{ COMPOMENT_NAME }}',
     data() {
-        return {};
+        return {
+            loading: false,//是否加载中
+            list: [],//表格展示数据
+            page: 1,//当前页数
+            pageSize: 10,//页面大小
+            date: [],//日期数组
+            state: '',//状态
+            key: '',//关键词
+        };
     },
     methods: {
         // 用于初始化一些数据
-        init() { },
+        init() {
+            this.update();
+        },
         // 用于更新一些数据
-        update() { },
+        async update() {
+            this.loading = true;
+            this.list = [];
+            const res = await this.$http.post('', {
+                SearchKey: this.key,
+            });
+            this.list = res.data;
+            this.loading = false;
+        },
     },
     // 计算属性
     computed: {},
@@ -19,6 +37,7 @@ export default {
     beforeMount() { },
     // el 被新创建的 vm.el 替换，并挂载到实例上去之后调用该钩子。
     mounted() {
+        this.init();
         this.$nextTick(() => { });
     },
     // 数据更新时调用，发生在虚拟 DOM 打补丁之前。
