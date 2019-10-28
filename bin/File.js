@@ -23,7 +23,6 @@ module.exports = class File {
             console.warn(styles.yellow.join(`[文件]`) + ':' + styles.green.join(`保存成功！------->${suffix}`));
             console.warn(styles.cyan.join(url));
 
-
         } catch (error) {
             console.warn(styles.red.join('[文件]:保存失败'));
             throw -1;

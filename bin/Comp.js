@@ -23,6 +23,7 @@ class Comp {
             console.warn(error);
         }
     }
+
     async create() {
         const smallCnomName = this.buildName();
         const newPathFold = path.join(process.cwd(), this.fileName);

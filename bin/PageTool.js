@@ -12,9 +12,9 @@ class PageTool {
         let file = new File(temp);
         try {
             await temp.inspect();
-            // await file.inspect();
+            await file.inspect();
         } catch (error) { return };
-
+        // blueprint
         console.warn(styles.yellow.join(`[开始创建组件]`) + ':' + styles.bold.join(temp.type));
 
         try {
@@ -28,9 +28,6 @@ class PageTool {
         try {
             await file.save('scss', await temp.read('scss'));
         } catch (error) { return };
-
-
-
 
     }
 
