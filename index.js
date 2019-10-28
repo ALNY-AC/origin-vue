@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const Page = require('./bin/Page');
 const PageTool = require('./bin/PageTool');
 const Comp = require('./bin/Comp');
 const GetClass = require('./bin/GetClass');
@@ -21,7 +20,7 @@ if (program.comp) {
     new Comp(program.comp);
 }
 if (program.page) {
-    new PageTool();
+    new PageTool().run();
 }
 if (program.class) {
     GetClass();
