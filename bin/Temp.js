@@ -26,7 +26,8 @@ module.exports = class Temp {
     async read(suffix) {
         let cont = '';
         try {
-            let url = `${this.tempUrl}\\index.${suffix}`;
+            const url = path.join(this.tempUrl, `index.${suffix}`)
+
             cont = this.replace(await fs.readFile(url, 'utf8'));
             console.warn(styles.yellow.join(`[模板]`) + ':' + styles.green.join(`读取成功！------->${suffix}`));
 

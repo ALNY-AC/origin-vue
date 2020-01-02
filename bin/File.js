@@ -18,7 +18,8 @@ module.exports = class File {
 
     async save(suffix, cont) {
         try {
-            const url = `${this.path}\\index.${suffix}`;
+            const url = path.join(this.path, `index.${suffix}`)
+
             await fs.outputFile(url, cont);
             console.warn(styles.yellow.join(`[文件]`) + ':' + styles.green.join(`保存成功！------->${suffix}`));
             console.warn(styles.cyan.join(url));
