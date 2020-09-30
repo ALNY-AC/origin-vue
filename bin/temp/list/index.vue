@@ -4,20 +4,20 @@
     <el-card shadow="never">
       <el-form inline>
         <el-form-item label="状态">
-          <el-select v-model="state">
+          <el-select v-model="query.state">
             <el-option label="状态1" :value="1"></el-option>
             <el-option label="状态2" :value="2"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="时间">
-          <el-date-picker v-model="date" value-format="yyyy-MM-dd" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期">
+          <el-date-picker v-model="query.date" value-format="yyyy-MM-dd" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="关键词">
-          <el-input @keydown.enter.native="update" v-model="key" placeholder="搜索"></el-input>
+          <el-input @keydown.enter.native="update" v-model="query.key" placeholder="搜索"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button @click="update">搜索</el-button>
+          <el-button @click="update()">搜索</el-button>
         </el-form-item>
       </el-form>
       <el-table :data="list" v-loading="loading" border style="width: 100%">
@@ -30,8 +30,8 @@
         <el-table-column></el-table-column>
         <el-table-column fixed="right" label="操作" width="100">
           <template slot-scope="scope">
-            <el-button type="text" @click="()=>scope.row">查看</el-button>
-            <el-button type="text" @click="()=>scope.row">编辑</el-button>
+            <el-button type="text" @click="show(scope.row)">查看</el-button>
+            <el-button type="text" @click="edit(scope.row)">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>

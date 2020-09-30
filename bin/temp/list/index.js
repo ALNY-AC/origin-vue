@@ -4,11 +4,14 @@ export default {
         return {
             loading: false,//是否加载中
             list: [],//表格展示数据
-            page: 1,//当前页数
-            pageSize: 10,//页面大小
-            date: [],//日期数组
-            state: '',//状态
-            key: '',//关键词
+            total: 0,
+            query: {
+                page: 1,//当前页数
+                size: 10,//页面大小
+                date: [],//日期数组
+                state: '',//状态
+                key: '',//关键词
+            }
         };
     },
     methods: {
