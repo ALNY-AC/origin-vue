@@ -4,7 +4,7 @@ export default {
         return {
             loading: false,//是否加载中
             list: [],//表格展示数据
-            total: 0,
+            total: 0,//总数
             query: {
                 page: 1,//当前页数
                 size: 10,//页面大小
@@ -21,13 +21,63 @@ export default {
         },
         // 用于更新一些数据
         async update() {
-            this.loading = true;
-            this.list = [];
-            const res = await this.$http.post('', {
-                SearchKey: this.key,
-            });
-            this.list = res.data;
-            this.loading = false;
+            try {
+                this.loading = true;
+                const res = await this.$http.post('', this.query);
+                this.list = res.data;
+                this.total = res.total;
+                this.loading = false;
+            } catch (error) {
+                console.error(error);
+                this.$message.error('接口错误～');
+                this.loading = false;
+            }
+        },
+        async show() { },
+        async edit() { },
+
+        async save(row) {
+
+            try {
+                const res = await this.$http.post('', {
+                    id: row.id,
+                });
+                if (res.code >= 0) {
+                    this.$message.success('操作成功！');
+                } else {
+                    this.$message.error('操作失败！');
+                }
+
+            } catch (error) {
+                console.error(error);
+                this.$message.error('接口错误～');
+            }
+            this.update();
+
+        },
+        async del(row) {
+
+            try {
+                await this.$confirm('确定删除吗？删除后数据无法恢复！', '提示');
+            } catch (error) {
+                return;
+            }
+
+            try {
+                const res = await this.$http.post('', {
+                    id: row.id
+                });
+                if (res.code >= 0) {
+                    this.$message.success('操作成功！');
+                } else {
+                    this.$message.error('操作失败！');
+                }
+            } catch (error) {
+                console.error(error);
+                this.$message.error('接口错误～');
+            }
+            this.update();
+
         },
     },
     // 计算属性
@@ -58,7 +108,14 @@ export default {
     // 包含 Vue 实例可用指令的哈希表。
     directives: {},
     // 一个对象，键是需要观察的表达式，值是对应回调函数。
-    watch: {},
+    watch: {
+        'query.size'() {
+            this.update();
+        },
+        'query.page'() {
+            this.update();
+        }
+    },
     // 组件列表
     components: {},
 };

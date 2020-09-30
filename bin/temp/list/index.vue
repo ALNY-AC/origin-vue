@@ -1,6 +1,5 @@
 <template>
   <div id="{{ COMPOMENT_NAME }}">
-    
     <el-card shadow="never">
       <el-form inline>
         <el-form-item label="状态">
@@ -10,8 +9,13 @@
           </el-select>
         </el-form-item>
         <el-form-item label="时间">
-          <el-date-picker v-model="query.date" value-format="yyyy-MM-dd" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期">
-          </el-date-picker>
+          <el-date-picker
+            v-model="query.date"
+            value-format="yyyy-MM-dd"
+            type="daterange"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          ></el-date-picker>
         </el-form-item>
         <el-form-item label="关键词">
           <el-input @keydown.enter.native="update" v-model="query.key" placeholder="搜索"></el-input>
@@ -32,12 +36,18 @@
           <template slot-scope="scope">
             <el-button type="text" @click="show(scope.row)">查看</el-button>
             <el-button type="text" @click="edit(scope.row)">编辑</el-button>
+            <el-button type="text" @click="del(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div style="padding:10px 0">
-        <el-pagination :current-page.sync="page" :page-sizes="[10, 20, 30, 40]" :page-size.sync="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="400">
-        </el-pagination>
+        <el-pagination
+          :current-page.sync="query.page"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size.sync="query.size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        ></el-pagination>
       </div>
     </el-card>
   </div>
