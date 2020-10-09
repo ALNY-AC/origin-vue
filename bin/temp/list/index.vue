@@ -11,7 +11,7 @@
         <el-form-item label="时间">
           <el-date-picker
             v-model="query.date"
-            value-format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd HH:mm:ss"
             type="daterange"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
@@ -43,7 +43,6 @@
       <div style="padding:10px 0">
         <el-pagination
           :current-page.sync="query.page"
-          :page-sizes="[10, 20, 30, 40]"
           :page-size.sync="query.size"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"

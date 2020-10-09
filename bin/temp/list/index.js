@@ -24,8 +24,10 @@ export default {
             try {
                 this.loading = true;
                 const res = await this.$http.post('', this.query);
-                this.list = res.data;
-                this.total = res.total;
+                if (res.code == 1) {
+                    this.list = res.data;
+                    this.total = res.total;
+                }
                 this.loading = false;
             } catch (error) {
                 console.error(error);
