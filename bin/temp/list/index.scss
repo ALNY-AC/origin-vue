@@ -1,6 +1,6 @@
 @import "@/styles/variable.scss";
 #{{ COMPOMENT_NAME }} {
-    // padding: $page-padding;
+    padding: $page-padding;
 }
 
 #{{ COMPOMENT_NAME }} /deep/ {}

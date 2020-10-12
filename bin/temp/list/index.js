@@ -11,7 +11,9 @@ export default {
                 date: [],//日期数组
                 state: '',//状态
                 key: '',//关键词
-            }
+            },
+            // 展示更多筛选
+            isMsoreScreen: false,
         };
     },
     methods: {
@@ -24,14 +26,14 @@ export default {
             try {
                 this.loading = true;
                 const res = await this.$http.post('', this.query);
-                if (res.code == 1) {
+                if (res.code == 0) {
                     this.list = res.data;
                     this.total = res.total;
                 }
                 this.loading = false;
             } catch (error) {
                 console.error(error);
-                this.$message.error('接口错误～');
+                this.$message.error('接口异常～');
                 this.loading = false;
             }
         },
@@ -44,7 +46,7 @@ export default {
                 const res = await this.$http.post('', {
                     id: row.id,
                 });
-                if (res.code >= 0) {
+                if (res.code == 0) {
                     this.$message.success('操作成功！');
                 } else {
                     this.$message.error('操作失败！');
@@ -52,7 +54,7 @@ export default {
 
             } catch (error) {
                 console.error(error);
-                this.$message.error('接口错误～');
+                this.$message.error('接口异常～');
             }
             this.update();
 
@@ -69,14 +71,14 @@ export default {
                 const res = await this.$http.post('', {
                     id: row.id
                 });
-                if (res.code >= 0) {
+                if (res.code == 0) {
                     this.$message.success('操作成功！');
                 } else {
                     this.$message.error('操作失败！');
                 }
             } catch (error) {
                 console.error(error);
-                this.$message.error('接口错误～');
+                this.$message.error('接口异常～');
             }
             this.update();
 
