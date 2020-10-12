@@ -65,9 +65,9 @@
         <el-table-column fixed="right" label="操作" width="300">
           <template slot-scope="scope">
             <div class="table-button">
-              <el-button type="text" @click="show(scope.row)">查看</el-button>
-              <el-button type="text" @click="edit(scope.row)">编辑</el-button>
-              <el-button type="text" @click="del(scope.row)">删除</el-button>
+              <el-button icon="el-icon-view" type="text" @click="show(scope.row)">查看</el-button>
+              <el-button icon="el-icon-edit" type="text" @click="edit(scope.row)">编辑</el-button>
+              <el-button icon="el-icon-delete" type="text" @click="del(scope.row)">删除</el-button>
             </div>
           </template>
         </el-table-column>
