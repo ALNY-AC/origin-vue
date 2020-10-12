@@ -51,6 +51,9 @@
           </el-col>
         </el-row>
       </el-form>
+      <el-button type="primary" icon="el-icon-circle-plus-outline">新增</el-button>
+      <el-button icon="el-icon-upload">导入</el-button>
+      <el-button icon="el-icon-download">导出</el-button>
     </el-card>
 
     <el-card shadow="never" header="搜索结果">
