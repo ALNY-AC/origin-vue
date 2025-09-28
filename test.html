@@ -1,0 +1,47 @@
+<div>
+    <el-dialog title="导入文件" :visible.sync="upExcleDialog">
+        <div class="loadSysDiv">
+            <el-form :model="uploadForm">
+                <el-upload class="avatar-uploader" ref="upload" :data="excleData" :action="excel_params.upUrl"
+                    multiple="false" :on-change="changeUp" :on-success="successUp" :before-upload="beforeUploadVideo"
+                    :auto-upload="false">
+                    <el-button slot="trigger" size="small" type="primary">选择EXCLE文件</el-button>
+                    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">开始导入
+                    </el-button>
+                    <el-button style="margin-left: 10px;" size="small" type="success"><a
+                            style="color: white;text-decoration:none" :href="excel_params.tplUrl">下载模板</a></el-button>
+                    <el-button v-show="excleData.type!=1" style="margin-left: 10px;" size="small" type="success"><a
+                            style="color: white;text-decoration:none" :href="excel_params.expUrl">下载示例</a></el-button>
+                </el-upload>
+                <span v-show="excleData.showMsg==1">
+                    <p>1.事项导入Excel模板填写时，请合并该合并的地方，具体可参考示例</p>
+                    <p>2.导入后请检查导入内容，完善并在系统中继续添加数源部门（共享需求）</p>
+                </span>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button size="mini" @click="upExcleDialog = false">关闭</el-button>
+            </div>
+        </div>
+    </el-dialog>
+    <el-dialog title="错误信息反馈" :visible.sync="erroVisisble" :before-close="refreshTable">
+        <el-button @click="downMsg">下 载</el-button>
+        <el-table :data="errorData" style="width: 100%">
+            <el-table-column type="index" label="序号" width="80">
+            </el-table-column>
+            <el-table-column prop="sheet" label="sheet名称" width="100">
+            </el-table-column>
+            <el-table-column prop="row" label="行数" width="80">
+            </el-table-column>
+            <el-table-column prop="cell" label="列数" width="80">
+            </el-table-column>
+            <el-table-column prop="errMsg" label="错误信息">
+            </el-table-column>
+        </el-table>
+    </el-dialog>
+    <el-dialog title="导入信息" :visible.sync="msgVisible" width="30%" :before-close="refreshTable">
+        <span>{{msg}}</span>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="refreshTable">关 闭</el-button>
+        </span>
+    </el-dialog>
+    <div>

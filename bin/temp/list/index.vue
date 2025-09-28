@@ -1,6 +1,11 @@
 <template>
   <div id="{{ COMPOMENT_NAME }}">
-    <el-card shadow="never" header="搜索条件" style="margin-bottom:20px">
+    <el-breadcrumb separator="/" style="margin-bottom:20px">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>模块</el-breadcrumb-item>
+    </el-breadcrumb>
+
+    <el-card shadow="never" header="模块名称" style="margin-bottom:20px">
       <el-form ref="queryForm" inline :model="query" @submit.native.prevent>
         <el-row>
           <el-col :span="24">
@@ -20,10 +25,7 @@
             </el-form-item>
             <el-form-item>
               <el-button @click="update()" type="primary" icon="el-icon-search">搜索</el-button>
-              <el-button
-                @click="$refs.queryForm.resetFields();update()"
-                icon="el-icon-refresh-right"
-              >重置</el-button>
+              <el-button @click="$refs.queryForm.resetFields()" icon="el-icon-refresh-right">重置</el-button>
               <el-button
                 type="text"
                 @click="isMsoreScreen=!isMsoreScreen"
@@ -56,7 +58,7 @@
       <el-button icon="el-icon-download">导出</el-button>
     </el-card>
 
-    <el-card shadow="never" header="搜索结果">
+    <el-card shadow="never">
       <el-table :data="list" v-loading="loading" border style="width: 100%">
         <el-table-column prop="p1" label="参数1"></el-table-column>
         <el-table-column prop="p2" label="参数9">

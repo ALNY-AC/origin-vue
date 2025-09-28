@@ -1,0 +1,217 @@
+<template>
+  <div class="itemDialogstyle">
+    <el-form :model="form" :rules="rules" ref="form" label-width="150px">
+      <el-col :span="12">
+        <el-form-item label="中文名称" prop="nameCn">
+          <template>
+            <el-input
+              v-model="form.nameCn"
+              @blur="checkChineseName(event,form.nameCn)"
+              placeholder="请输入中文名称"
+            ></el-input>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="英文名称" prop="nameEn">
+          <template>
+            <el-input v-model="form.nameEn" placeholder="请输入英文名称"></el-input>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="数据类型" prop="dataType">
+          <template>
+            <el-cascader :options="$dic('CATA_ELE_DATATYPE')" v-model="form.dataType"></el-cascader>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="字段描述" prop="desc">
+          <template>
+            <el-input v-model="form.desc" placeholder="请输入字段描述"></el-input>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="数据长度" prop="length">
+          <template>
+            <el-input v-model="form.length" placeholder="请输入数据长度"></el-input>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12" v-if="datamode==='see'">
+        <template>
+          <el-form-item label="所在信息资源名称：">
+            <span class="see-span">{{form.infoName}}</span>
+          </el-form-item>
+        </template>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="来源部门：" prop="originOrg">
+          <template>
+            <template v-if="userType == 3">
+              <el-input v-model="originOrgName" placeholder="来源部门" readonly></el-input>
+            </template>
+            <template v-else>
+              <el-input
+                v-model="originOrgName"
+                placeholder="来源部门"
+                @click.native="showTree('originOrg')"
+              ></el-input>
+            </template>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="默认值" prop="defaultValue">
+          <template>
+            <el-input v-model="form.defaultValue" placeholder="请输入默认值"></el-input>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="对象类型" prop="objectType">
+          <template>
+            <el-select v-model="form.objectType" placeholder="请选择">
+              <el-option
+                v-for="dic in $dic('CATA_ELE_OBJECTYPE')"
+                :key="dic.dicKey"
+                :label="dic.dicValue"
+                :value="dic.dicKey"
+              ></el-option>
+            </el-select>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="是否字典项" prop="dic">
+          <template>
+            <el-select v-model="form.dic" placeholder="请选择">
+              <el-option
+                v-for="dic in $dic('YES_NO')"
+                :key="dic.dicKey"
+                :label="dic.dicValue"
+                :value="dic.dicKey"
+              ></el-option>
+            </el-select>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="共享类型" prop="shareType">
+          <template>
+            <el-select
+              @change="changeshareType(event,form.shareType)"
+              v-model="form.shareType"
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="dic in $dic('CATA_INFO_SHARETYPE')"
+                :key="dic.dicKey"
+                :label="dic.dicValue"
+                :value="dic.dicKey"
+              ></el-option>
+            </el-select>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="共享条件" prop="shareCondition">
+          <template>
+            <el-input v-model="form.shareCondition" placeholder="请输入共享条件"></el-input>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="共享方式" prop="shareMode">
+          <template>
+            <el-cascader :options="$dic('CATA_INFO_SHAREMETHOD')" v-model="form.shareMode"></el-cascader>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="是否向全社会开放" prop="open">
+          <template>
+            <template v-if="form.shareType ==='2'||!form.shareType||form.shareType.length === 0">
+              <el-select v-model="form.open" placeholder="请选择" @change="openChange(form.open)">
+                <el-option
+                  v-for="dic in $dic('YES_NO')"
+                  :key="dic.dicKey"
+                  :label="dic.dicValue"
+                  :value="dic.dicKey"
+                ></el-option>
+              </el-select>
+            </template>
+            <template v-else>
+              <el-select v-model="form.open" placeholder="请选择" disabled>
+                <el-option
+                  v-for="dic in $dic('YES_NO')"
+                  :key="dic.dicKey"
+                  :label="dic.dicValue"
+                  :value="dic.dicKey"
+                ></el-option>
+              </el-select>
+            </template>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12" v-if="form.open ==='1'">
+        <el-form-item label="开放条件" prop="openConditions">
+          <template>
+            <el-input v-model="form.openConditions" placeholder="请输入开放条件"></el-input>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="更新周期" prop="updateCycle">
+          <template>
+            <el-select disabled v-model="form.updateCycle" placeholder="请选择">
+              <el-option
+                v-for="dic in $dic('CATA_UPDATE_FREQ')"
+                :key="dic.dicKey"
+                :label="dic.dicValue"
+                :value="dic.dicKey"
+              ></el-option>
+            </el-select>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="是否主键" prop="key">
+          <template>
+            <el-select v-model="form.key" placeholder="请选择">
+              <el-option
+                v-for="dic in $dic('YES_NO')"
+                :key="dic.dicKey"
+                :label="dic.dicValue"
+                :value="dic.dicKey"
+              ></el-option>
+            </el-select>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="是否为空" prop="blank">
+          <template>
+            <el-select v-model="form.blank" placeholder="请选择">
+              <el-option
+                v-for="dic in $dic('YES_NO')"
+                :key="dic.dicKey"
+                :label="dic.dicValue"
+                :value="dic.dicKey"
+              ></el-option>
+            </el-select>
+          </template>
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="是否归集" prop="imp">
+          <template>
+            <span class="see-span">{{$dic('YES_NO',form.imp)}}</span>
+          </template>
+        </el-form-item>
+      </el-col>
+    </el-form>
+  </div>
+</template>
